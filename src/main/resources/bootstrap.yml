@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: RETRIEVE-CURRENT-TRANSACTION  data:    mongodb:      host: curso-platzy.lgctd.mongodb.net
+      username: IBM_MICROSERVICE
+      password: BNAZmFB1d1oFFnTI
+      database: IBM_MICROSERVICE
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      default-zone: http://localhost:8761/eureka
+server:
+  port: 8081
