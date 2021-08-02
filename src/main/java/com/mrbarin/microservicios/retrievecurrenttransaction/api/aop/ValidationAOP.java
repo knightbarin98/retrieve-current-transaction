@@ -25,7 +25,7 @@ public class ValidationAOP {
 
 	private RequestCurrentTransaction request;
 
-	@Around("@annotation(com.mrbarin.microservicios.retrievetransactionuser.api.annotations.Validate)")
+	@Around("@annotation(com.mrbarin.microservicios.retrievecurrenttransaction.api.annotations.Validate)")
 	public Object requestRetrieveValidation(ProceedingJoinPoint joinPoint) throws Throwable {
 
 		log.info("Request Validation");
@@ -48,12 +48,19 @@ public class ValidationAOP {
 
 		if (request.getCustomerId() == null) {
 			exception = new GlobalException(
-					new ErrorResponse("Bad Request", 400, "accountId", "El campo accoutId no puede estar vacio"));
+					new ErrorResponse("Bad Request", 400, "customerId", "El campo customerId no puede estar vacio"));
+			log.info("Exception 400", exception);
+			throw exception;
+		}
+		
+		if (String.valueOf(request.getCustomerId()).length() < 6  ) {
+			exception = new GlobalException(
+					new ErrorResponse("Bad Request", 400, "customerId", "El campo customerId no puede ser menor a 6 dígitos"));
 			log.info("Exception 400", exception);
 			throw exception;
 		}
 
-		if (request.getTransactionDateStart() == null) {
+		if (request.getTransactionDateStart() == null || request.getTransactionDateStart().isEmpty()) {
 			exception = new GlobalException(new ErrorResponse("Bad Request", 400, "transactionDateStart",
 					"El campo transactionDateStart no puede estar vacio"));
 
@@ -61,7 +68,7 @@ public class ValidationAOP {
 			throw exception;
 		}
 
-		if (request.getTransactionDateEnd() == null) {
+		if (request.getTransactionDateEnd() == null || request.getTransactionDateEnd().isEmpty()) {
 			exception = new GlobalException(new ErrorResponse("Bad Request", 400, "transactionDateEnd",
 					"El campo transactionDateEndno puede estar vacio"));
 			log.info("Exception 500", exception);

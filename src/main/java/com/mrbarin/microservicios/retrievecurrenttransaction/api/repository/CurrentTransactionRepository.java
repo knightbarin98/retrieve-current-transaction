@@ -23,7 +23,15 @@ public class CurrentTransactionRepository {
 	
 	public Optional<TransactionsResponse> search(RequestCurrentTransaction request){
 		log.info("Repository run method for customer´s transactions search");
-		List<Transaction> transactions = dao.findTransactionsByCustomerIdAndDateBetween(request.getCustomerId(), request.getTransactionDateStart(), request.getTransactionDateEnd());
+		//List<Transaction> transactions = dao.findTransactionsByCustomerIdAndDateBetween(request.getCustomerId(),buildRegex(request.getTransactionDateStart(), request.getTransactionDateEnd()));
+		List<Transaction> transactions = dao.findByCustomerId(request.getCustomerId());
+		log.info(transactions.toString());
 		return Optional.of(new TransactionsResponse(transactions));
+	}
+	
+	public String buildRegex(String dateStart, String dateEnd) {
+		StringBuilder builder = new StringBuilder();
+		
+		return null;
 	}
 }
