@@ -1,7 +1,7 @@
 spring:
   application:
     name: RETRIEVE-CURRENT-TRANSACTION  data:    mongodb:
-      uri: mongodb+srv://IBM_MICROSERVICE:BNAZmFB1d1oFFnTI@curso-platzy.lgctd.mongodb.net/IBM_MICROSERVICE
+      uri: mongodb+srv://IBM_MICROSERVICE:BNAZmFB1d1oFFnTI@curso-platzy.lgctd.mongodb.net/IBM-MICROSERVICE
       authentication-database: admin
 eureka:
   client:
